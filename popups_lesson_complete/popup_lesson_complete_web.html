@@ -104,8 +104,8 @@
             text-align: center;
             background-color: #fff;
             border-radius: 3rem;
-            padding: 52px 15px;
-            width: 750px;
+            padding: 10px;
+            min-width: 700px;
             height: unset !important;
             display: flex;
             align-items: center;
@@ -121,8 +121,8 @@
         .mp-close {
             position: absolute;
             z-index: 50;
-            right: 32px;
-            top: 32px;
+            right: 12px;
+            top: 12px;
             width: 32px;
             height: 32px;
             opacity: 0.3;
@@ -272,7 +272,6 @@
             min-width: 170px;
             width: 200px;
             padding: 10px;
-            margin-top: 18px;
             border: none;
             color: white;
             cursor: pointer;
@@ -605,7 +604,7 @@
                 <h5 class="col-12 mp-title">{{congrat_text}}</h5>
                 <span class="next-step-text">{{congrat_text_2}}</span>
                 <button class="pm-button" id="mp-next-step"
-                        data-text="{{is_completed_all_lesson}}">
+                        data-text="{{is_show_button}}">
                     {{button_text}}
                 </button>
             </div>
