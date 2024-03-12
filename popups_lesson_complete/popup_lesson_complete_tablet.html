@@ -635,8 +635,8 @@
                 const shieldClass = this.getShieldClass();
                 this.setShieldClass(shieldClass);
                 // Button
-                const isCompleteLesson = this.getIsCompleteLesson();
-                this.setDisplayingButton(!isCompleteLesson);
+                const isShowNextButton = this.checkNextButtonState();
+                this.setDisplayingButton(isShowNextButton);
             }
 
             getShieldClass() {
@@ -677,7 +677,7 @@
                 document.documentElement.style.setProperty('--banner-color', bannerColor.color);
             }
 
-            getIsCompleteLesson() {
+            checkNextButtonState() {
                 return document.querySelector('.pm-button').dataset.text === 'true' ? true : false;
             }
 
