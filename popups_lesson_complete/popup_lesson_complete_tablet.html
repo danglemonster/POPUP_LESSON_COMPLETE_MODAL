@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1">
+    <title>Document</title>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+          rel="stylesheet">
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #019cdb;
+            --text-gray: #5d5f5e;
+            --cross-color: #110078;
+            --shield-border-color: #111;
+            --background-color: #ff5022;
+            --darker-background-color: #bf360c;
+
+            --primary-gold-color: #ffd44c;
+            --secondary-gold-color: #f0ba4a;
+            --primary-silver-color: #ddd;
+            --secondary-silver-color: #afafaf;
+            --primary-bronze-color: #daa073;
+            --secondary-bronze-color: #9b6945;
+
+            --banner-blue-color: var(--primary-color);
+
+            --banner-color: #f05051;
+            --banner-lighter: 1.1;
+            --banner-darker: 0.9;
+
+            --button-radius: 50px;
+            --font-size-large: 35px;
+            --font-size-text: 27px;
+            --height-ticket: 64px;
+        }
+
+        * {
+            font-family: "Nunito Sans", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        html,
+        .pm-body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .pm-body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        .col-12 {
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .mx-3 {
+            margin-right: 1rem !important;
+            margin-left: 1rem !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem !important;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* @media (min-width:1281px) { */
+        .container {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 3rem;
+            padding: 52px 15px;
+            width: 750px;
+            height: unset !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: rgba(0, 0, 0, 0.15) 9.95px 9.95px 9.6px;
+        }
+
+        .mp-title {
+            font-size: var(--font-size-large);
+            color: var(--text-gray);
+        }
+
+        .mp-close {
+            position: absolute;
+            z-index: 50;
+            right: 32px;
+            top: 32px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.3;
+            cursor: pointer;
+        }
+
+        .mp-close:hover {
+            opacity: 1;
+        }
+
+        .mp-close:before,
+        .mp-close:after {
+            content: "";
+            position: absolute;
+            left: 15px;
+            height: 33px;
+            width: 5px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+
+        .mp-close:before {
+            transform: rotate(45deg);
+        }
+
+        .mp-close:after {
+            transform: rotate(-45deg);
+        }
+
+        .content-container {
+            padding-top: 10px;
+            position: relative;
+        }
+
+        /* Banner */
+        .mp-pointer {
+            width: 60px;
+            height: var(--height-ticket);
+            position: relative;
+            background: var(--banner-color);
+        }
+
+        .mp-pointer-left:before {
+            content: "";
+            position: absolute;
+            left: calc(var(--height-ticket) / -2);
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: calc(var(--height-ticket) / 2) solid transparent;
+            border-top: calc(var(--height-ticket) / 2) solid var(--banner-color);
+            border-bottom: calc(var(--height-ticket) / 2) solid var(--banner-color);
+        }
+
+        .mp-pointer-left:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-top: 25px solid var(--banner-color);
+            border-left: 35px solid transparent;
+            filter: brightness(var(--banner-darker));
+        }
+
+        .mp-pointer-center {
+            width: 200px;
+            background-color: transparent;
+        }
+
+        .mp-pointer-center:before {
+            content: attr(data-text);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 25px;
+            width: 270px;
+            height: var(--height-ticket);
+            background-color: var(--banner-color);
+            filter: brightness(var(--banner-lighter));
+            z-index: 50;
+            font-size: 60px;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mp-pointer-center:after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) rotate(10deg);
+            width: 400px;
+            height: 200px;
+            z-index: 15;
+            bottom: -5px;
+        }
+
+        .mp-pointer-right:before {
+            content: "";
+            position: absolute;
+            left: 0px;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-top: 25px solid var(--banner-color);
+            border-right: 35px solid transparent;
+            filter: brightness(var(--banner-darker));
+        }
+
+        .mp-pointer-right:after {
+            content: "";
+            position: absolute;
+            right: calc(var(--height-ticket) / -2);
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-right: calc(var(--height-ticket) / 2) solid transparent;
+            border-top: calc(var(--height-ticket) / 2) solid var(--banner-color);
+            border-bottom: calc(var(--height-ticket) / 2) solid var(--banner-color);
+        }
+
+        .mp-ticket {
+            width: 100%;
+            display: flex;
+            margin-top: 170px;
+        }
+
+        .pm-content {
+            padding-top: 50px;
+            gap: 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Button */
+        .pm-button {
+            background-color: var(--primary-color);
+            border-radius: var(--button-radius);
+            font-size: var(--font-size-large);
+            min-height: 60px;
+            min-width: 170px;
+            width: 200px;
+            margin-top: 18px;
+            padding: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .pm-button:hover {
+            opacity: 0.8;
+        }
+
+        .pm-button:focus {
+            outline: 0;
+        }
+
+        h5 {
+            margin: 0;
+        }
+
+        .next-step-text {
+            font-size: var(--font-size-text);
+            color: var(--text-gray);
+        }
+
+        /* Progress */
+        .percent {
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+            margin-left: -115px;
+        }
+
+        #progress {
+            position: relative;
+            width: 560px;
+            height: 560px;
+            transform: rotate(176deg);
+        }
+
+        #progress circle {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #f0f0f0;
+            stroke-width: 6;
+            stroke-linecap: round;
+            /* stroke-dasharray: 100;
+            stroke-dashoffset: calc(100 - var(--percent)); */
+            stroke: transparent;
+            transition: all 1s ease-in-out;
+        }
+
+        /* Shield  */
+        .shield-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .shield-container svg {
+            width: 300px;
+        }
+
+        /* Supper gold */
+        .supper-gold-badged #content-shield,
+        .supper-gold-badged #border,
+        .supper-gold-badged #Ellipse_2,
+        .supper-gold-badged #Ellipse_6,
+        .supper-gold-badged #Rectangle_688,
+        .supper-gold-badged #Rectangle_689,
+        .supper-gold-badged #Rectangle_688-2,
+        .supper-gold-badged #Rectangle_689-2 {
+            fill: var(--primary-gold-color);
+        }
+
+        .supper-gold-badged #star-background {
+            fill: white;
+            stroke: white;
+        }
+
+        .supper-gold-badged #shied-border {
+            fill: var(--secondary-gold-color);
+        }
+
+        /* Gold */
+        .gold-badged #content-shield,
+        .gold-badged #border,
+        .gold-badged #Ellipse_2,
+        .gold-badged #Ellipse_6,
+        .gold-badged #Rectangle_688,
+        .gold-badged #Rectangle_689,
+        .gold-badged #Rectangle_688-2,
+        .gold-badged #Rectangle_689-2 {
+            fill: var(--primary-gold-color);
+        }
+
+        .gold-badged #star-background {
+            fill: var(--secondary-gold-color);
+            stroke: var(--primary-gold-color);
+        }
+
+        .gold-badged #shied-border {
+            fill: var(--secondary-gold-color);
+        }
+
+        /* Silver */
+        .silver-badged #content-shield,
+        .silver-badged #border {
+            fill: var(--primary-silver-color);
+        }
+
+        .silver-badged #star-background {
+            fill: var(--secondary-silver-color);
+            stroke: var(--primary-silver-color);
+        }
+
+        .silver-badged #shied-border,
+        .silver-badged #Ellipse_5,
+        .silver-badged #Ellipse_3,
+        .silver-badged #Ellipse_4,
+        .silver-badged #Ellipse_2,
+        .silver-badged #Ellipse_6,
+        .silver-badged #Rectangle_688,
+        .silver-badged #Rectangle_689,
+        .silver-badged #Rectangle_688-2,
+        .silver-badged #Rectangle_689-2 {
+            fill: var(--secondary-silver-color);
+        }
+
+        /* Bronze */
+        .bronze-badged #content-shield,
+        .bronze-badged #border {
+            fill: var(--primary-bronze-color);
+        }
+
+        .bronze-badged #star-background {
+            fill: var(--secondary-bronze-color);
+            stroke: var(--primary-bronze-color);
+        }
+
+        .bronze-badged #shied-border,
+        .bronze-badged #Ellipse_2,
+        .bronze-badged #Ellipse_6,
+        .bronze-badged #Rectangle_688,
+        .bronze-badged #Rectangle_689,
+        .bronze-badged #Rectangle_688-2,
+        .bronze-badged #Rectangle_689-2,
+        .bronze-badged #Ellipse_5,
+        .bronze-badged #Ellipse_3,
+        .bronze-badged #Ellipse_4 {
+            fill: var(--secondary-bronze-color);
+        }
+
+        /* Scale by screen */
+        @media (min-width:320px) {
+
+            /* smartphones, iPhone, portrait 480x320 phones */
+            .container {
+                transform: scale(0.48);
+            }
+        }
+
+        @media (min-width:481px) {
+
+            /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+            .container {
+                transform: scale(0.55);
+            }
+        }
+
+        @media (min-width:641px) {
+
+            /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+            .container {
+                transform: scale(0.60);
+            }
+        }
+
+        @media (min-width:961px) {
+
+            /* tablet, landscape iPad, lo-res laptops ands desktops */
+            .container {
+                transform: scale(1);
+            }
+        }
+
+        /* } */
+    </style>
+</head>
+
+<body class="pm-body">
+    <div class="container">
+        <div>
+            <div class="mp-close"
+                 onclick="window.location.href='pianomarvel://close'"></div>
+            <div class="row justify-content-center">
+                <div class="content-container">
+                    <div class="percent">
+                        <svg id="progress"
+                             width="70"
+                             height="70"
+                             viewBox="0 0 120 90">
+                            <circle id="progress-percent"
+                                    cx="59.3"
+                                    cy="70.2"
+                                    r="32"
+                                    stroke-dasharray="100"
+                                    stroke-dashoffset="100"
+                                    pathLength="100">
+                            </circle>
+                        </svg>
+                    </div>
+                    <div class="shield-container">
+                        <svg id="shield-svg"
+                             data-text="{{level_score}}"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="636.987"
+                             height="636.886"
+                             viewBox="0 0 636.987 636.886">
+                            <g id="badge"
+                               transform="translate(0 0)">
+                                <path id="content-shield"
+                                      data-name="Path 17401"
+                                      d="M68.542,87.043C87.107,69.685,188.315-.535,297.5,0,387.739,82.5,501.9,242.17,423.406,415.637,261.545,507.129,90.9,405.238.657,322.74-7.092,202.7,56.049,103.181,68.542,87.043Z"
+                                      transform="translate(330.336 0) rotate(47)"
+                                      fill="#ffd44c" />
+                                <g id="star"
+                                   transform="translate(250.28 191.548)">
+                                    <path id="star-background"
+                                          data-name="Path 17402"
+                                          d="M56.171,4l16.7,33.132,35.474,4.718L83.005,67.319l5.408,35.806L56.426,86.838l-32.5,16.288L29.8,67.294,4,41.85l36.069-4.718Z"
+                                          transform="translate(6.434 6.434)"
+                                          fill="#fff"
+                                          stroke="#fff"
+                                          stroke-width="2" />
+                                    <path id="star-border"
+                                          data-name="Path 17403"
+                                          d="M0,0H125.211V125.211H0Z"
+                                          fill="none" />
+                                </g>
+                                <path id="shied-border"
+                                      data-name="Subtraction 1"
+                                      d="M188.695,414.108h0a247.893,247.893,0,0,1-27.126-10.331,234.474,234.474,0,0,1-24.527-12.843A230.489,230.489,0,0,1,115,375.843,234.781,234.781,0,0,1,95.31,358.767a246.548,246.548,0,0,1-17.443-18.8c-5.337-6.383-10.491-13.2-15.319-20.252-4.66-6.81-9.14-14.025-13.314-21.445-4.023-7.15-7.868-14.678-11.429-22.374-12.957-28.007-22.793-59.468-29.234-93.509-2.8-14.795-4.95-30.093-6.393-45.468C.869,122.971.136,108.908,0,95.126a279.4,279.4,0,0,1,27.615-25.54,306.264,306.264,0,0,1,29-20.717,346.7,346.7,0,0,1,56.974-28.811c8.329-3.306,16.871-6.34,25.39-9.017C146.231,8.76,153.5,6.728,160.577,5A205.591,205.591,0,0,1,187.24,0,118.178,118.178,0,0,1,198.96,1.587c5.511.975,11.543,2.268,17.929,3.843,7.421,1.83,15.065,3.982,22.72,6.4,8.775,2.768,17.555,5.88,26.094,9.249A351.365,351.365,0,0,1,322.338,49.32a282.128,282.128,0,0,1,27.7,19.592,236.386,236.386,0,0,1,25.405,23.636c.136,13.778-.332,27.819-1.392,41.735-1.167,15.33-3.062,30.585-5.63,45.341-5.9,33.9-15.336,65.331-28.042,93.408-3.489,7.709-7.274,15.261-11.248,22.445-4.123,7.452-8.564,14.711-13.2,21.576-4.8,7.109-9.938,13.991-15.274,20.455a250.6,250.6,0,0,1-17.478,19.08,239.409,239.409,0,0,1-42.075,33.026,247.138,247.138,0,0,1-24.852,13.44,263.511,263.511,0,0,1-27.564,11.054Zm-.947-393.2h0A181.528,181.528,0,0,0,164.2,25.32c-6.253,1.527-12.671,3.322-19.077,5.335C137.6,33.019,130.055,35.7,122.7,38.619A306.2,306.2,0,0,0,72.383,64.063a270.494,270.494,0,0,0-25.61,18.3,246.759,246.759,0,0,0-24.388,22.556c.12,12.171.768,24.59,1.924,36.913,1.274,13.579,3.174,27.09,5.646,40.156,5.688,30.063,14.375,57.848,25.818,82.583,3.144,6.8,6.54,13.445,10.093,19.76,3.687,6.553,7.643,12.925,11.759,18.939,4.264,6.231,8.816,12.249,13.529,17.886a217.735,217.735,0,0,0,15.4,16.6,207.368,207.368,0,0,0,17.385,15.08,203.564,203.564,0,0,0,19.471,13.328A207.105,207.105,0,0,0,165.075,377.5a218.954,218.954,0,0,0,23.956,9.124,232.706,232.706,0,0,0,24.343-9.763A218.264,218.264,0,0,0,235.323,365a211.422,211.422,0,0,0,37.159-29.167,221.328,221.328,0,0,0,15.436-16.851c4.713-5.708,9.251-11.786,13.49-18.065,4.093-6.063,8.014-12.474,11.656-19.055,3.511-6.345,6.853-13.014,9.934-19.822,11.222-24.8,19.555-52.551,24.766-82.494,2.268-13.032,3.941-26.5,4.972-40.043.936-12.29,1.35-24.691,1.229-36.859a208.782,208.782,0,0,0-22.437-20.874,249.183,249.183,0,0,0-24.468-17.3,310.32,310.32,0,0,0-50.018-24.945c-7.543-2.976-15.3-5.724-23.045-8.168-6.762-2.133-13.513-4.033-20.066-5.649-12.424-3.064-21.672-4.486-26.184-4.8Z"
+                                      transform="translate(126.911 139.529)"
+                                      fill="#f0ba4a" />
+                                <circle id="Ellipse_2"
+                                        data-name="Ellipse 2"
+                                        cx="17.912"
+                                        cy="17.912"
+                                        r="17.912"
+                                        transform="translate(278.788 36.525)"
+                                        fill="#ffd44c" />
+                                <circle id="Ellipse_3"
+                                        data-name="Ellipse 3"
+                                        cx="12.05"
+                                        cy="12.05"
+                                        r="12.05"
+                                        transform="translate(331.548 72.349)"
+                                        fill="#f0ba4a" />
+                                <circle id="Ellipse_4"
+                                        data-name="Ellipse 4"
+                                        cx="12.05"
+                                        cy="12.05"
+                                        r="12.05"
+                                        transform="translate(40.391 289.902)"
+                                        fill="#f0ba4a" />
+                                <circle id="Ellipse_5"
+                                        data-name="Ellipse 5"
+                                        cx="14.004"
+                                        cy="14.004"
+                                        r="14.004"
+                                        transform="translate(97.059 104.266)"
+                                        fill="#f0ba4a" />
+                                <circle id="Ellipse_6"
+                                        data-name="Ellipse 6"
+                                        cx="12.05"
+                                        cy="12.05"
+                                        r="12.05"
+                                        transform="translate(502.203 141.393)"
+                                        fill="#ffd44c" />
+                                <g id="Group_8"
+                                   data-name="Group 8"
+                                   transform="translate(544.867 280.783)">
+                                    <rect id="Rectangle_688"
+                                          data-name="Rectangle 688"
+                                          width="9.77"
+                                          height="42.99"
+                                          transform="translate(16.61)"
+                                          fill="#ffd44c" />
+                                    <rect id="Rectangle_689"
+                                          data-name="Rectangle 689"
+                                          width="9.77"
+                                          height="42.99"
+                                          transform="translate(42.99 15.958) rotate(90)"
+                                          fill="#ffd44c" />
+                                </g>
+                                <g id="Group_9"
+                                   data-name="Group 9"
+                                   transform="translate(43.558 133.577)">
+                                    <rect id="Rectangle_688-2"
+                                          data-name="Rectangle 688"
+                                          width="11.09"
+                                          height="48.798"
+                                          transform="translate(18.854)"
+                                          fill="#ffd44d" />
+                                    <rect id="Rectangle_689-2"
+                                          data-name="Rectangle 689"
+                                          width="11.09"
+                                          height="48.798"
+                                          transform="translate(48.798 18.114) rotate(90)"
+                                          fill="#ffd44d" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="mp-ticket">
+                        <div class="mp-pointer mp-pointer-left"></div>
+                        <div class="mp-pointer mp-pointer-center"
+                             id="current-level"
+                             data-text="{{current_level}}">
+                            <span>{{current_level}}</span>
+                        </div>
+                        <div class="mp-pointer mp-pointer-right"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pm-content">
+                <h5 class="col-12 mp-title">{{congrat_text}}</h5>
+                <span class="next-step-text">{{congrat_text_2}}</span>
+                <button class="pm-button"
+                        onclick="window.location.href='pianomarvel://lessonCompletionModalLetsGo'"
+                        data-text="{{is_completed_all_lesson}}">
+                    {{button_text}}
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    if (typeof PopupLesson === "undefined") {
+        class PopupLesson {
+            BANNER_COLORS = [
+                { method: 1, name: 'blue', color: '#019cdb' },
+                { method: 2, name: 'red', color: '#f05051' },
+                { method: 3, name: 'green', color: '#00ba3a' },
+                { method: 4, name: 'purple', color: '#af78a9' },
+                { method: 5, name: 'orange', color: '#ce6549' },
+                { method: 6, name: 'black', color: '#484747' },
+            ];
+
+            constructor() {
+                // Banner
+                const bannerColor = this.getBannerColor();
+                this.setBannerColor(bannerColor);
+                // Shield
+                const shieldClass = this.getShieldClass();
+                this.setShieldClass(shieldClass);
+                // Button
+                const isCompleteLesson = this.getIsCompleteLesson();
+                this.setDisplayingButton(!isCompleteLesson);
+            }
+
+            getShieldClass() {
+                const levelScore = parseInt(document.querySelector('#shield-svg').dataset.text || 0);
+                let className = "";
+
+                if (levelScore >= 80 && levelScore <= 89) {
+                    className = 'bronze-badged';
+                } else if (levelScore >= 90 && levelScore <= 95) {
+                    className = 'silver-badged';
+                } else if (levelScore >= 96 && levelScore <= 99) {
+                    className = 'gold-badged';
+                } else {
+                    className = 'supper-gold-badged';
+                }
+
+                return className;
+            }
+
+            setShieldClass(className) {
+                const shieldSvg = document.querySelector('#shield-svg');
+
+                shieldSvg.classList.add(className);
+            }
+
+            getBannerColor() {
+                let methodFullName = document.querySelector('#current-level').dataset.text;
+                let methodNumber = parseInt(methodFullName.slice(0, methodFullName.length - 1));
+                let banner = this.BANNER_COLORS.find((banner => banner.method === methodNumber));
+
+                return banner || this.BANNER_COLORS[0];
+            }
+
+            setBannerColor(bannerColor) {
+                if (bannerColor.name == "red") {
+                    document.documentElement.style.setProperty('--banner-lighter', 1.3);
+                }
+                document.documentElement.style.setProperty('--banner-color', bannerColor.color);
+            }
+
+            getIsCompleteLesson() {
+                return document.querySelector('.pm-button').dataset.text === 'true' ? true : false;
+            }
+
+            setDisplayingButton(isDisplay) {
+                const button = document.querySelector('.pm-button');
+                if (!isDisplay) {
+                    button.style.display = 'none';
+                }
+            }
+        }
+        new PopupLesson();
+    } else {
+        new PopupLesson();
+    }
+
+    const PROGRESS_LAST_PERCENT = 52;
+    setTimeout(function () {
+        //https://codepen.io/MaffooBristol/pen/zKwore
+        let progressPercent = document.getElementById('progress-percent');
+        progressPercent.style.stroke = "#1d4686";
+
+        progressPercent.setAttribute('stroke-dashoffset', 100 - PROGRESS_LAST_PERCENT);
+    }, 50);
+
+</script>
+
+</html>
