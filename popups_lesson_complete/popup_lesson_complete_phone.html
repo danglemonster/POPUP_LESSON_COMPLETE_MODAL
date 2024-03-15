@@ -39,7 +39,7 @@
 
             --button-radius: 50px;
             --font-size-large: 35px;
-            --font-size-text: 27px;
+            --font-size-text: 24px;
             --height-ticket: 64px;
         }
 
@@ -255,12 +255,14 @@
         }
 
         .pm-content {
-            padding-top: 50px;
-            gap: 20px;
+            padding-top: 35px;
+            gap: 15px;
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
+            padding-right: 15px;
+            padding-left: 15px;
         }
 
         /* Button */
@@ -492,7 +494,7 @@
                              data-text="{{level_score}}"
                              xmlns="http://www.w3.org/2000/svg"
                              width="636.987"
-                             height="636.886"
+                             height="336.886"
                              viewBox="0 0 636.987 636.886">
                             <g id="badge"
                                transform="translate(0 0)">
@@ -692,7 +694,7 @@
         new PopupLesson();
     }
 
-    const PROGRESS_LAST_PERCENT = 52;
+    var PROGRESS_LAST_PERCENT = 52;
     setTimeout(function () {
         //https://codepen.io/MaffooBristol/pen/zKwore
         let progressPercent = document.getElementById('progress-percent');
