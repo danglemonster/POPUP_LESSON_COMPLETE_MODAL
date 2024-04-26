@@ -1,0 +1,383 @@
+<style>
+  *,
+  *::before,
+  *::after {
+    box-sizing: unset;
+  }
+
+  .mp-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .mp-justify-content-center {
+    justify-content: center;
+  }
+
+  .mp-col-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .mp-mx-3 {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+
+  .mp-mb-3 {
+    margin-bottom: 1rem !important;
+  }
+
+  .mp-mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .c-not-allowed {
+    cursor: not-allowed;
+  }
+
+  .mp-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 3rem;
+    padding: 30px 15px;
+    margin: 0 20px;
+    width: 650px;
+    height: unset !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+/* smartphones, iPhone, portrait 480x320 phones */
+  @media (min-width:320px) {}
+ 
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+  @media (min-width:481px) {}
+ 
+  /* Screen from iPhone 5+ */
+  @media (min-width:641px) {}
+ 
+  /* Screen from iPad mini+ */
+  @media (min-width:961px) {
+    .mp-container {
+      transform: scale(0.7);
+    }
+  }
+ 
+  /* big landscape tablets, laptops, and desktops */
+  @media (min-width:1025px) {
+    .mp-container {
+      transform: scale(1);
+    }
+  }
+
+  .mp-title {
+    font-size: 45px;
+    font-weight: bold;
+    color: #656565;
+  }
+
+  .mp-close {
+    position: absolute;
+    z-index: 50;
+    right: 0px;
+    top: 15px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+    cursor: pointer;
+  }
+
+  .mp-close:hover {
+    opacity: 1;
+  }
+
+  .mp-close:before,
+  .mp-close:after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    height: 33px;
+    width: 5px;
+    background-color: #333;
+    border-radius: 10px;
+  }
+
+  .mp-close:before {
+    transform: rotate(45deg);
+  }
+
+  .mp-close:after {
+    transform: rotate(-45deg);
+  }
+
+
+  .mp-pointer {
+    width: 140px;
+    height: 90px;
+    position: relative;
+    background: #f05051;
+  }
+
+  .mp-pointer-left:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 45px solid white;
+    border-top: 45px solid transparent;
+    border-bottom: 45px solid transparent;
+  }
+
+  .mp-pointer-left:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-top: 25px solid #cc3f3e;
+    border-left: 50px solid transparent;
+  }
+
+  .mp-pointer-center {
+    width: 280px;
+    background-color: #fff;
+  }
+
+  .mp-pointer-center:before {
+    content: attr(data-text);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 25px;
+    width: 380px;
+    height: 90px;
+    background-color: #f16767;
+    z-index: 50;
+    font-size: 60px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mp-pointer-center:after {
+    content: "";
+    position: absolute;
+    background: url("https://pianomarvel.com/nextgen/assets/images/events/golden_ticket.svg") no-repeat center / 330px;
+    left: 50%;
+    transform: translateX(-50%) rotate(10deg);
+    width: 400px;
+    height: 200px;
+    z-index: 15;
+    bottom: -5px;
+  }
+
+  .mp-pointer-right:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-top: 25px solid #cc3f3e;
+    border-right: 50px solid transparent;
+  }
+
+  .mp-pointer-right:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-right: 45px solid white;
+    border-top: 45px solid transparent;
+    border-bottom: 45px solid transparent;
+  }
+
+  .mp-ticket {
+    margin-top: 160px;
+    margin-bottom: 50px;
+    width: calc(100% - 60px);
+    display: flex;
+    justify-content: center;
+  }
+
+  .mp-rank-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #656565;
+  }
+
+  .mp-rank-number {
+    display: flex;
+    overflow: hidden;
+    height: 48px;
+    font-size: 40px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #019cdb;
+    border-radius: 10px;
+    padding: 5px 10px;
+  }
+
+  .mp-rank-number>span {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    line-height: 48px;
+    transition: all 1.5s ease;
+  }
+
+  .mp-rank-number>span.visible {
+    position: static;
+    width: 30px;
+    opacity: 1;
+    flex-shrink: 1;
+  }
+
+  .mp-leaderboard {
+    background: #019cdb url("https://pianomarvel.com/nextgen/assets/images/events/leaderboard.svg") no-repeat center / 50px;
+    width: 120px;
+    height: 60px;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .mp-details {
+    background-color: #b23d7d;
+    width: 240px;
+    height: 60px;
+    border-radius: 30px;
+    font-size: 25px;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .mp-next {
+    background: #019cdb url("https://pianomarvel.com/nextgen/assets/images/events/next.svg") no-repeat center / 40px;
+    width: 120px;
+    height: 60px;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+</style>
+
+
+<div class="mp-container">
+  <div>
+    <div id="mp-btn-close"
+         class="mp-close"></div>
+    <div class="mp-row mp-justify-content-center">
+      <div class="mp-col-12 mp-title">{{popup_title}}</div>
+      <div class="mp-ticket">
+        <div class="mp-pointer mp-pointer-left"></div>
+        <div class="mp-pointer mp-pointer-center"
+             data-text="{{entries_text_v2}}: {{entries}}">
+          <span></span>
+        </div>
+        <div class="mp-pointer mp-pointer-right"></div>
+      </div>
+      <div class="mp-col-12">
+        <div class="mp-rank-title">Rank</div>
+        <div class="mp-mx-auto mp-mb-3 mp-rank-number"
+             data-rank="{{rank}}"></div>
+      </div>
+    </div>
+    <div class="mp-row mp-justify-content-center">
+      <div class="mp-leaderboard"
+           onclick="window.open('{{report_link}}', '_blank')"></div>
+      <div class="mp-mx-3 mp-details"
+           onclick="window.open('{{video_link}}', '_blank')">Challenge Details</div>
+      <div id="mp-next-song"
+           class="mp-next">
+        <span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (typeof ScrollNumber === "undefined") {
+    class ScrollNumber {
+      stat = document.querySelector('.mp-rank-number')
+
+      constructor() {
+        this.init()
+      }
+
+      scrollNumber(digits) {
+        this.stat.querySelectorAll('span[data-value]').forEach((tick, i) => {
+          tick.style.transform = `translateY(-${100 * parseInt(digits[i])}%)`;
+        })
+
+        setTimeout(() => {
+          this.stat.style.width = `${digits.length * 28}px`;
+        }, 100)
+      }
+
+      addDigit(digit, fresh) {
+        const spanList = Array(10)
+          .join(0)
+          .split(0)
+          .map((x, j) => `<span>${j}</span>`)
+          .join('')
+
+        this.stat.insertAdjacentHTML(
+          "beforeend",
+          `<span style="transform: translateY(-1000%)" data-value="${digit}">
+      ${spanList}
+    </span>`)
+
+        const firstDigit = this.stat.lastElementChild
+
+        setTimeout(() => {
+          firstDigit.className = "visible";
+        }, fresh ? 0 : 2000);
+      }
+
+      init() {
+        let toDigits = document.querySelector('.mp-rank-number').dataset.rank
+        toDigits = toDigits.toString().split('')
+        const length = toDigits.length
+        const minDigit = 3
+
+        let startNum = []
+        const totalLength = length > minDigit ? length : minDigit
+        for (let i = 0; i < totalLength; i++) {
+          this.addDigit('0', true)
+          startNum = startNum.concat(['0'])
+        }
+
+        this.scrollNumber(startNum)
+
+        for (let i = 0; i < minDigit - length; i++) {
+          toDigits.unshift('0')
+        }
+        setTimeout(() => this.scrollNumber(toDigits), 500)
+      }
+    }
+
+    new ScrollNumber()
+  } else {
+    new ScrollNumber()
+  }
+
+</script>

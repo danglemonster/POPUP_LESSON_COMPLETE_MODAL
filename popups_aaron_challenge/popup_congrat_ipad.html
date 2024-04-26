@@ -1,0 +1,487 @@
+<style>
+  *,
+  *::before,
+  *::after {
+    box-sizing: unset;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mp-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    gap: 1rem;
+  }
+
+  .mp-justify-content-center {
+    justify-content: center;
+  }
+
+  .mp-col-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .mp-mx-3 {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+
+  .mp-mb-3 {
+    margin-bottom: 1rem !important;
+  }
+
+  .mp-mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .c-not-allowed {
+    cursor: not-allowed;
+  }
+
+  .mp-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 3rem;
+    padding: 2rem;
+    margin: 0 20px;
+    width: 650px;
+    height: unset !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* smartphones, iPhone, portrait 480x320 phones */
+  @media (min-width:320px) {}
+
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+  @media (min-width:481px) {}
+
+  /* Screen from iPhone 5+ */
+  @media (min-width:641px) {}
+
+  /* Screen from iPad mini+ */
+  @media (min-width:961px) {
+    .mp-container {
+      transform: scale(0.7);
+    }
+  }
+
+  /* big landscape tablets, laptops, and desktops */
+  @media (min-width:1025px) {
+    .mp-container {
+      transform: scale(1);
+    }
+  }
+
+  .mp-title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #656565;
+  }
+
+  .mp-close {
+    position: absolute;
+    z-index: 50;
+    right: 30px;
+    top: 35px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+    cursor: pointer;
+  }
+
+  .mp-close:hover {
+    opacity: 1;
+  }
+
+  .mp-close:before,
+  .mp-close:after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    height: 33px;
+    width: 5px;
+    background-color: #333;
+    border-radius: 10px;
+  }
+
+  .mp-close:before {
+    transform: rotate(45deg);
+  }
+
+  .mp-close:after {
+    transform: rotate(-45deg);
+  }
+
+  .mp-ticket {
+    margin-top: 80px;
+    margin-bottom: 60px;
+    width: calc(100% - 60px);
+    display: flex;
+    justify-content: center;
+    transform: scale(1.2);
+  }
+
+  .mp-pointer {
+    width: 140px;
+    height: 90px;
+    position: relative;
+    background: #f05051;
+  }
+
+  .mp-pointer-left:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 45px solid white;
+    border-top: 45px solid transparent;
+    border-bottom: 45px solid transparent;
+  }
+
+  .mp-pointer-center {
+    width: 100px;
+    background-color: #fff;
+  }
+
+  .mp-pointer-center:before {
+    /* content: attr(data-text); */
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background-color: #ffd34d;
+    z-index: 50;
+    /* font-size: 60px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+  }
+
+  .mp-pointer-center .dot {
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background-color: var(--color);
+    position: absolute;
+    z-index: 100;
+  }
+
+  .mp-pointer-center .plus {
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--color);
+    clip-path: polygon(0 35%, 35% 35%, 35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 36% 65%, 0 65%);
+    position: absolute;
+    z-index: 100;
+  }
+
+  .mp-pointer-center .mp-pointer-ticket {
+    display: flex;
+    overflow: hidden;
+    width: fit-content;
+    height: 48px;
+    font-size: 52px;
+    font-weight: bold;
+    color: #fff;
+    font-weight: bold;
+    position: absolute;
+    z-index: 200;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+  }
+
+  .mp-minimum-number {
+    font-size: 36px !important;
+  }
+
+  .mp-pointer-center .mp-pointer-ticket>span {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    line-height: 48px;
+    transition: all 1.5s ease;
+  }
+
+  .mp-pointer-center .mp-pointer-ticket>span.visible {
+    position: static;
+    width: fit-content;
+    opacity: 1;
+    flex-shrink: 1;
+  }
+
+  .mp-pointer-center:after {
+    /* content: attr(data-text); */
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 150px;
+    height: 150px;
+    border: 6px solid #f2ba49;
+    border-radius: 50%;
+    background: none;
+    z-index: 100;
+    font-size: 60px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mp-pointer-right:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-right: 45px solid white;
+    border-top: 45px solid transparent;
+    border-bottom: 45px solid transparent;
+  }
+
+  .mp-rank-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #656565;
+  }
+
+  .mp-rank-number {
+    display: flex;
+    overflow: hidden;
+    height: 48px;
+    font-size: 30px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #1ab0db;
+    border-radius: 10px;
+    justify-content: center;
+  }
+
+  .mp-rank-number>span {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    line-height: 48px;
+    width: 22px;
+    transition: all 1.5s ease;
+  }
+
+  .mp-rank-number>span.visible {
+    position: static;
+    width: 22px;
+    opacity: 1;
+    flex-shrink: 1;
+  }
+
+  .mp-leaderboard {
+    background: #1ab0db url("https://pianomarvel.com/nextgen/assets/images/events/leaderboard.svg") no-repeat center / 50px;
+    width: 120px;
+    height: 60px;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .mp-details {
+    background-color: #1ab0db;
+    width: 240px;
+    height: 60px;
+    border-radius: 30px;
+    font-size: 25px;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .mp-next {
+    background: #DD1B84 url("https://pianomarvel.com/nextgen/assets/images/events/next.svg") no-repeat center / 40px;
+    width: 120px;
+    height: 60px;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .mp-ticket-title {
+    position: absolute;
+    bottom: -5px;
+    color: white;
+    z-index: 99;
+    font-size: 18px;
+  }
+</style>
+
+
+<div class="mp-container">
+  <div>
+    <div id="mp-btn-close"
+         class="mp-close" onclick="window.location.href='pianomarvel://close'"></div>
+    <div class="mp-row mp-justify-content-center">
+      <div class="mp-col-12 mp-title">{{popup_title}}</div>
+      <div class="mp-ticket">
+        <div class="mp-pointer mp-pointer-left"></div>
+        <div class="mp-pointer mp-pointer-center">
+          <div class="dot"
+               style="--size:10px; --color:#f2ba49; top: 35px; right: 225px;"></div>
+          <div class="dot"
+               style="--size:8px; --color:#f2ba49; top: 100px; right: 200px;"></div>
+          <div class="dot"
+               style="--size:15px; --color:#ffd34d; bottom: 110px; right: 130px;"></div>
+          <div class="dot"
+               style="--size:12px; --color:#f2ba49; bottom: 130px; right: 90px;"></div>
+          <div class="dot"
+               style="--size:13px; --color:#ffd34d; bottom: 120px; left: 110px;"></div>
+          <div class="dot"
+               style="--size:10px; --color:#f2ba49; top: 105px; left: 130px;"></div>
+          <div class="plus"
+               style="--size:22px; --color:#f2ba49; top: 20px; right: 240px;"></div>
+          <div class="plus"
+               style="--size:18px; --color:#f2ba49; top: 115px; left: 105px;"></div>
+          <div class="mp-pointer-ticket" data-text="{{entries}}"></div>
+        </div>
+        <div class="mp-pointer mp-pointer-right"></div>
+        <span class="mp-ticket-title">Ticket</span>
+      </div>
+      <div class="mp-col-12">
+        <div class="mp-rank-title">Rank</div>
+        <div class="mp-mx-auto mp-mb-3 mp-rank-number"
+             data-rank="{{rank}}"></div>
+      </div>
+    </div>
+    <div class="mp-row mp-justify-content-center">
+      <div class="mp-leaderboard"
+      onclick="window.location.href='pianomarvel://leaderBoard'"></div>
+      <div class="mp-mx-3 mp-details"
+          onclick="window.location.href='pianomarvel://challengeDetails'">Challenge Details</div>
+      <div id="mp-next-song"
+           class="mp-next"
+           onclick="window.location.href='pianomarvel://nextSong'"></div>
+        <span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (typeof ScrollNumber === "undefined") {
+    class ScrollNumber {
+      rankEl = document.querySelector('.mp-rank-number')
+      ticketEl = document.querySelector('.mp-pointer-ticket')
+
+
+      constructor() {
+        let toRankDigits = document.querySelector('.mp-rank-number').dataset.rank
+        toRankDigits = toRankDigits.toString().split('')
+
+        let toTicketDigits = document.querySelector('.mp-pointer-ticket').dataset.text
+        if (toTicketDigits && parseInt(toTicketDigits) > 1) {
+          let toTicketTitleEl = document.querySelector('.mp-ticket-title')
+          toTicketTitleEl.innerHTML = 'Tickets'
+        }
+
+        if (toTicketDigits && parseInt(toTicketDigits) > 9999) {
+          this.ticketEl.classList.add('mp-minimum-number')
+        }
+        toTicketDigits = toTicketDigits.toString().split('')
+
+        this.init('rankEl', toRankDigits)
+        this.init('ticketEl', toTicketDigits)
+      }
+
+      scrollNumber(digits, element) {
+        this[element].querySelectorAll('span[data-value]').forEach((tick, i) => {
+          tick.style.transform = `translateY(-${100 * parseInt(digits[i])}%)`;
+        })
+
+        setTimeout(() => {
+          this[element].style.width = `${digits.length * 28}px`;
+        }, 100)
+      }
+
+      addDigit(digit, fresh, element, isAddComma) {
+        const spanList = Array(10)
+          .join(0)
+          .split(0)
+          .map((x, j) => {
+            if (isAddComma) {
+              return `<span>${j},</span>`
+            } else {
+              return `<span>${j}</span>`
+            }
+            
+          })
+          .join('')
+
+        this[element].insertAdjacentHTML(
+          "beforeend",
+          `<span style="transform: translateY(-1000%)" data-value="${digit}">
+      ${spanList}
+    </span>`)
+
+        const firstDigit = this[element].firstElementChild
+
+        setTimeout(() => {
+          firstDigit.className = "visible";
+        }, fresh ? 0 : 2000);
+      }
+
+      init(element, toDigits) {
+        const length = toDigits.length
+        let minDigit = 3
+
+        let startNum = []
+
+        if (element === 'ticketEl') {
+          minDigit = 1
+        }
+        const totalLength = length > minDigit ? length : minDigit
+        const listAddComma = [{size: 3, index: 0}, {size: 6, index: 3}]
+        
+        for (let i = 0; i < totalLength; i++) {
+          this.addDigit('0', true, element)
+          startNum = startNum.concat(['0'])
+        }
+
+        this.scrollNumber(startNum, element)
+
+        for (let i = 0; i < minDigit - length; i++) {
+          toDigits.unshift('0')
+        }
+        setTimeout(() => this.scrollNumber(toDigits, element), 500)
+      }
+    }
+
+    new ScrollNumber()
+  } else {
+    new ScrollNumber()
+  }
+
+</script>
