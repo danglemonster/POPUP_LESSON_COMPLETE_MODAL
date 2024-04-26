@@ -422,7 +422,7 @@
         })
 
         setTimeout(() => {
-          this[element].style.width = `${digits.length * 28}px`;
+          this[element].style.width = `${digits.length * 40}px`;
         }, 100)
       }
 
@@ -431,20 +431,19 @@
           .join(0)
           .split(0)
           .map((x, j) => {
-            if (isAddComma) {
-              return `<span>${j},</span>`
-            } else {
-              return `<span>${j}</span>`
-            }
-            
+            return `<span>${j}</span>`
           })
           .join('')
-
+        let html = `<span style="transform: translateY(-1000%)" data-value="${digit}">
+                      ${spanList}
+                   </span>`;
+        if (isAddComma) {
+          html += `<span>,</span>`
+        }
         this[element].insertAdjacentHTML(
           "beforeend",
-          `<span style="transform: translateY(-1000%)" data-value="${digit}">
-      ${spanList}
-    </span>`)
+          html
+          )
 
         const firstDigit = this[element].firstElementChild
 
@@ -466,7 +465,17 @@
         const listAddComma = [{size: 3, index: 0}, {size: 6, index: 3}]
         
         for (let i = 0; i < totalLength; i++) {
-          this.addDigit('0', true, element)
+          let isAddComma = false;
+
+          if (totalLength === 4 && element === 'ticketEl' && i === 0) {
+            isAddComma = true
+          } else if (totalLength === 5 && element === 'ticketEl' && i === 1) {
+            isAddComma = true
+          } else if (totalLength === 6 && element === 'ticketEl' && i === 2) {
+            isAddComma = true
+          }
+
+          this.addDigit('0', true, element, isAddComma)
           startNum = startNum.concat(['0'])
         }
 
